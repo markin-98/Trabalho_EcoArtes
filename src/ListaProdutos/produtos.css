@@ -1,0 +1,111 @@
+@import url('/paleta');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+header.navbar {
+    background-color: var(--color-navbar);
+}
+
+header.navbar h2,
+header.navbar .nav-link {
+    color: var(--color-purewhite);
+}
+
+header.navbar .nav-link:hover {
+    color: var(--color-darkgreen);
+}
+
+.card {
+    background-color: var(--color-purewhite);
+    border-radius: 10px;
+    border: 1px solid var(--color-lightgrey);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-title {
+    color: var(--color-darkgrey);
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+}
+
+.card-price {
+    color: var(--color-green);
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.btn-adicionar {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-green);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: stretch;
+    text-align: center;
+    user-select: none;
+}
+
+.btn-adicionar:hover {
+    background-color: var(--color-darkgreen);
+}
+
+footer {
+    background: var(--color-lightgrey);
+    padding: 1rem 0;
+}
+
+
+.icon-link {
+    color: var(--color-purewhite);
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.icon-link:hover {
+    color: var(--color-darkgreen);
+}
+
+.icon-link svg {
+    width: 28px;
+    height: 28px;
+}

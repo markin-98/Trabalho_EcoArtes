@@ -1,0 +1,41 @@
+<main>
+<html lang="pt-BR"></html>
+    <div class="container">
+        <div class="row">
+            <div class=" col-6 offset-3">
+
+                {{>mensagens}}
+                <form action="/hbcadastrar" method="post" enctype="multipart/form-data">
+                    <input id="useremail" type="hidden" name="useremail" value=""> 
+                    <input type="text" name="nome" class="form-control" placeholder="Nome do produto">
+                    <input type="number" step="0.01" name="valor" class="form-control" placeholder="Valor do produto">
+                    <input type="text" name="descricao" value="{{produto.descricao}}" class="form-control"
+                        placeholder="Descrição do produto">
+
+                    <select name="categoria" class="form-control">
+                        <option value="">Categoria do produto</option>
+                        <option value="alimenticio">Alimentício</option>
+                        <option value="artesanato">Artesanato</option>
+                        <option value="adubo">Fertilizante</option>
+                        <option value="plantas">Plantas e Sementes</option>
+                        <option value="inseticidas">Inseticidas Orgânicos</option>
+                    </select>
+
+                    <input type="file" name="imagem" class="form-control">
+                    <input type="submit" class="btn text-light" style="background: var(--color-green)" value="Cadastrar">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        let e = document.getElementById("useremail");
+        let user = localStorage.getItem('CurrentUser');
+        user = JSON.parse(user);
+        e.value = user.email;
+    })
+</script>

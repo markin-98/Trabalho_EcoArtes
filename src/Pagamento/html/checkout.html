@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | EcoArtes</title>
+    <link rel="stylesheet" href="/paleta">
+    <link rel="stylesheet" href="../css/checkout.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="containercol-12 mx-auto" style="background-color: var(--color-coldwhite);">
+    <header class="col-12 px-4 py-3 m-0 mb-3" style="background-color: var(--color-green);">
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="/" class="text-decoration-none"><h2 class="text-light m-0">EcoArtes</h2></a>
+            <a href="../html/pagamento.html" class="btn btn-light">Voltar</a>
+        </div>
+    </header>
+    <main class="container">
+        <h3 class="mb-4">Finalizar Pagamento</h3>
+        <div class="mb-3">
+            <label class="form-label">Método de pagamento:</label>
+            <div class="btn-group w-100 mb-3">
+                <button class="btn btn-outline-success" onclick="selecionarMetodo('pix')">Pix</button>
+                <!-- <button class="btn btn-outline-success" onclick="selecionarMetodo('boleto')">Boleto</button> -->
+                <button class="btn btn-outline-success" onclick="selecionarMetodo('cartao')">Cartão</button>
+            </div>
+        </div>
+        <div id="area-pagamento" class="border rounded p-4" style="background-color: var(--color-purewhite);">
+            <p>Selecione um método de pagamento para continuar.</p>
+        </div>
+    </main>
+</body>
+
+</html>

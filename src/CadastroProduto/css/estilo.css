@@ -1,0 +1,59 @@
+form{
+    margin-top: 25px;
+    text-align: center;
+}
+form input, form select{
+    margin-bottom: 10px;
+}
+
+.card {
+    margin-top: 40px;
+    padding: 5px;
+}
+
+form input[type = "submit"]{
+    margin-top: 10px;
+}
+
+form img{
+    width: 200px;
+    margin-bottom: 40px;
+}
+.textos{
+    display: flex;
+    justify-content: space-around ;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.card a{
+    
+    margin-top: 5px;
+}
+.alert{
+    margin-top: 30px;
+}
+
+
+/* Remover margem do formulário */
+.formularioPesquisa{
+    margin: 0;
+}
+
+/* Estrutura do formulário de pesquisa (barra de navegação) */
+.formularioPesquisa input,
+.formularioPesquisa input[type="submit"]
+{
+    margin: 0;
+}
+
+/* Configurar o dropdown para ser exibido quando passar o cursor sobre o link */
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+.produtoNaoEncontrado{
+    text-align: center;
+    margin-top: 50px;
+}

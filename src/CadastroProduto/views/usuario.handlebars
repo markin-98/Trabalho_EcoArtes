@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        {{#if sucesso}}
+            <div class="alert alert-success">Cadastro realizado com sucesso!</div>
+        {{/if}}
+
+        <form action="/usuario" method="POST">
+            <input type="text" name="nome" class="form-control mb-2" placeholder="Nome">
+            <input type="email" name="email" class="form-control mb-2" placeholder="Email">
+            <input type="tel" name="telefone" class="form-control mb-2" placeholder="Telefone">
+            <textarea name="endereco" class="form-control mb-2" placeholder="Endereço"></textarea>
+            <button type="submit" class="btn btn-danger" style="color: var(--color-green)">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>

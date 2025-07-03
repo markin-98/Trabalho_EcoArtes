@@ -1,0 +1,98 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-image">
+            <img src="img/cadastrologin.svg" alt="Imagem de login">
+        </div>
+        <div class="form">
+            <form id="loginForm">
+                <div class="form-header">
+                    <h1>Entrar</h1>
+                    <div class="login-button">
+                        <button type="button"><a href="cadastro.html">Cadastrar</a></button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-box">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                    </div>
+                </div>
+                Acessar como:
+                <div class="user-type-group">
+                    <input type="radio" id="cliente" name="userType" value="cliente" class="user-type-input" hidden>
+                    <label for="cliente" class="user-type-option">Cliente</label>
+                
+                    <input type="radio" id="vendedor" name="userType" value="vendedor" class="user-type-input" hidden>
+                    <label for="vendedor" class="user-type-option">Vendedor</label>
+                </div>
+
+                <div class="continue-button">
+                    <button type="button" onclick="validarLogin()">Entrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function validarLogin() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                return alert("Preencha todos os campos.");
+            }
+            //var userData = JSON.parse(localStorage.getItem('userData'));
+            const userType = document.querySelector('input[name="userType"]:checked');
+            if (!userType) {
+                return alert("Escolha o tipo de usuário.");
+            }
+
+            utype = userType.value == 'cliente' ? 'usuarios' : 'empreendedores'
+            const response = await fetch(`/${utype}/${email}`)
+            const users = await response.json();
+            const user = users.usuarios[0];
+            
+
+            if (user != undefined && user.senha == password) 
+            {
+                localStorage.setItem('CurrentUser', JSON.stringify({ nome: user.nome, email: email, userType: utype, carrinho: [] })) // SISTEMA DE SESSÃO
+                if (utype == 'usuarios')
+                {
+                    alert("Login bem-sucedido! Redirecionando para a página principal...");
+                    window.location.href = "/"; 
+                }
+                else 
+                {
+                    alert("Login bem-sucedido! Redirecionando para a página de produtos...");
+                    window.location.href = "/listaprodutos"; 
+                }
+                luser = localStorage.getItem('CurrentUser');
+                lluser = JSON.parse(luser);
+                console.log(lluser);
+                console.log(lluser.email);
+            } 
+            else 
+            {
+                alert("Credenciais inválidas. Por favor, verifique seu email e senha.");
+            }
+        }
+    </script>
+</body>
+
+</html>

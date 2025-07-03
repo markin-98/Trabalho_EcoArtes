@@ -1,0 +1,60 @@
+<html lang="pt-BR"></html>
+{{!-- Elemento nav, responsável pela estrutura de navegação --}}
+<nav class="navbar navbar-expand-lg" style="background: var(--color-green)">
+    
+    {{!-- Estrutura container do bootstrap para agrupar a estrutura --}}
+    <div class="container-fluid" >
+    
+        {{!-- Logo/Título do projeto --}}
+        <a class="navbar-brand text-light p-2" href="/"><h2>EcoArtes</h2></a>
+    
+        {{!-- Botão que é exibido em versões de pequeno e médio porte (Até 991px) --}}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        {{!-- Estrutura contendo os links e o formulário para pesquisa --}}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            
+            {{!-- Lista de links --}}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                
+                {{!-- Link de cadastro --}}
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/formulario">Cadastrar Produto</a>
+                </li>
+
+                <p id="myproducts" class="d-none"></p>
+
+                {{!-- Dropdown contendo os links para listagem de produtos --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Meus produtos
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" onclick="Listar('*')" >Todos os produtos</a></li>
+                        <li><a class="dropdown-item" onclick="Listar('alimenticio')">Alimentício</a></li>
+                        <li><a class="dropdown-item" onclick="Listar('artesanato')">Artesanato</a></li>
+                        <li><a class="dropdown-item" onclick="Listar('adubo')">Fertilizante</a></li>
+                        <li><a class="dropdown-item" onclick="Listar('plantas')">Plantas e Sementes</a></li>
+                        <li><a class="dropdown-item" onclick="Listar('inseticidas')">Inseticidas Orgânicos</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            {{!-- Formulário para realizar a pesquisa de produtos --}}
+            <form class="d-flex formularioPesquisa" onsubmit="return Pesquisar(event)">
+                <input id="searchbox" class="form-control me-2" placeholder="Procurando algo?">
+                <input type="submit"  class="btn" style="border-color: var(--color-purewhite); color: var(--color-purewhite)">
+            </form>
+
+            <div class="d-flex">
+                <a id="cart" href="src/Pagamento/html/pagamento.html" class="d-none p-2 link-dark text-decoration-none"></a>
+                <a id="login" href="src/Cadastro/login.html" class="d-flex p-2 link-dark text-decoration-none">
+                <a id="icons" onclick="logOut()" class="d-block p-2 link-dark text-decoration-none"></a>
+            </div>
+        </div>
+    </div>
+</nav>
+<script src="/headerscript"></script>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="cadastro.css">
+  <title>Cadastro</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="form-image">
+      <img src="img/cadastrologin.svg" alt="Imagem de cadastro" />
+    </div>
+    <div class="form">
+      <form id="registerForm">
+        <div class="form-header">
+          <h1>Cadastre-se</h1>
+          <div class="login-button">
+            <button type="button"><a href="login.html">Entrar</a></button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-box">
+            <label for="firstname">Primeiro nome</label>
+            <input type="text" id="firstname" placeholder="João" required />
+          </div>
+
+          <div class="input-box">
+            <label for="lastname">Sobrenome</label>
+            <input type="text" id="lastname" placeholder="Silva" required />
+          </div>
+
+          <div class="input-box">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="email@exemplo.com" required />
+          </div>
+
+          <div class="input-box">
+            <label for="password">Senha</label>
+            <input type="password" id="password" placeholder="Mínimo 6 caracteres" required />
+          </div>
+
+          <div class="input-box">
+            <label for="confirmPassword">Confirmar senha</label>
+            <input type="password" id="confirmPassword" placeholder="Confirme sua senha" required />
+          </div>
+        </div>
+        
+        
+        
+        <div class="user-type-group">
+          <h3>Selecione o tipo de registro</h3>
+          <input type="radio" id="cliente" name="userType" value="cliente" class="user-type-input" hidden>
+          <label for="cliente" class="user-type-option">Cliente</label>
+
+          <input type="radio" id="vendedor" name="userType" value="vendedor" class="user-type-input" hidden>
+          <label for="vendedor" class="user-type-option">Vendedor</label>
+        </div>
+
+        <div id="userDescription" class="user-description"></div>
+
+
+        <div class="continue-button">
+          <button type="button" onclick="validarCadastro()">Continuar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    async function validarCadastro() {
+      const firstname = document.getElementById('firstname').value.trim();
+      const lastname = document.getElementById('lastname').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const userType = document.querySelector('input[name="userType"]:checked');
+
+      if (!firstname || !lastname || !email || !password || !confirmPassword) {
+        return alert("Preencha todos os campos.");
+      }
+
+      if (!userType) {
+        return alert("Escolha o tipo de usuário.");
+      }
+
+      if (password !== confirmPassword) {
+        return alert("As senhas não coincidem.");
+      }
+
+      if (password.length < 6) {
+        return alert("A senha deve ter no mínimo 6 caracteres.");
+      }
+
+      let utype = userType.value == 'cliente' ? 'usuarios' : 'empreendedores'
+      //console.log(utype);
+
+      let emailexists = await fetch(`/exists?table=${utype}&column=email&value=${email}`, {
+        method: 'GET',
+      });
+      if (await emailexists.json()) {
+        return alert("Esse email já foi registrado");
+      }
+
+      let name = firstname + ' ' + lastname;
+      const userData = {
+        name,
+        email,
+        password
+      };
+      if (utype == 'usuarios' || utype == 'empreendedores') {
+        fetch(`/cadastraruser/${utype}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData)
+        });
+        alert("Cadastro realizado com sucesso!");
+        window.location.href = "login.html";
+      }
+      else {
+        console.log('Erro no cadastro de usuario!');
+        console.log(utype);
+      }
+    }
+
+    const descricaoEl = document.getElementById("userDescription");
+
+    document.getElementById("cliente").addEventListener("change", () => {
+      descricaoEl.innerText = "Cliente – pode comprar e ter acesso aos nossos tutoriais.";
+      descricaoEl.style.display = "block";
+    });
+
+    document.getElementById("vendedor").addEventListener("change", () => {
+      descricaoEl.innerText = "Vendedor – pode cadastrar seus produtos para venda, gerenciar seu próprio catálogo, visualizar e remover os itens que anunciou.";
+      descricaoEl.style.display = "block";
+    });
+
+
+  </script>
+</body>
+
+</html>

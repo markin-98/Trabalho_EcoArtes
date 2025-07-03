@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoArtes</title>
+    {{!-- Boststrap--}}
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    {{!--css--}}
+    <link rel="stylesheet" href="../src/CadastroProduto/css/estilo.css">
+    <link rel="stylesheet" href="/paleta">
+</head>
+
+<body>
+    {{>menu}}
+    {{{body}}}
+</body>
+
+</html>
+
+<script>
+
+var currentuser;
+var currentfilter = "";
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    user = localStorage.getItem('CurrentUser');
+    if (user !== null) // usuario logado
+    {
+        currentuser = JSON.parse(user);
+        //loadLogout();
+        if (currentuser.userType == 'empreendedores')
+        {
+            //console.log(`Estou cadastrado em ${currentuser.email} e esses são meus produtos:`);
+            //test(currentuser.email);
+        }
+        else 
+        {
+            window.location.href = `/`; //mandar de volta para home page se não estiver logado como empreendedor
+        }
+    }
+    else 
+    {
+        window.location.href = `/`; //mandar de volta para home page se não estiver logado
+    }
+});
+
+function GetUserId()
+{
+    return currentuser.email;
+}
+
+async function Listar(category = ""){
+    let url = `/hblistar/${currentuser.email}`
+    let search = document.getElementById('searchbox');
+    let queryParams = new URLSearchParams();
+    if (category == "") category = currentfilter;
+    else if (category == "*") category = "";
+
+    if (category) queryParams.append("c", category);
+    if (search) 
+    {
+        if (search.value != "") queryParams.append("s", search.value);
+    }
+    if (queryParams.toString()) url += `?${queryParams.toString()}`;
+
+    currentfilter = category;
+
+    console.log(queryParams.toString());
+    window.location.href = url;
+}
+
+function Pesquisar(event) {
+        event.preventDefault(); // Prevent the form from refreshing the page
+        Listar();
+    }
+
+</script>
